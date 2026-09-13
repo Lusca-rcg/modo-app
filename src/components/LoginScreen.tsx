@@ -208,17 +208,17 @@ export default function LoginScreen() {
           <div className="mb-1 flex items-center justify-center gap-2">
             <Zap size={16} className="text-indigo-400" strokeWidth={2.5} />
             <h1 className="text-2xl font-extrabold tracking-tight text-white">
-              Foco<span
+              <span
                 className="text-transparent bg-clip-text"
                 style={{ backgroundImage: 'linear-gradient(90deg, #818cf8, #c084fc)' }}
-              >Zero</span>
+              >MODO</span>
             </h1>
             <Zap size={16} className="text-purple-400" strokeWidth={2.5} />
           </div>
 
           <p className="mt-2 text-xs leading-relaxed text-slate-400 max-w-xs mx-auto">
-            Equilibre seu tempo de tela,{' '}
-            <span className="text-indigo-300 font-medium">potencialize seu aprendizado.</span>
+            Seu espaço de foco e bem-estar digital.{' '}
+            <span className="text-indigo-300 font-medium">Aprenda com equilíbrio.</span>
           </p>
 
           <div
