@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import {
   Bell,
   User,
@@ -17,10 +16,9 @@ import {
   Landmark,
   Trophy,
   BarChart3,
-  Home,
-  Map,
-  ClipboardList,
 } from 'lucide-react'
+import BottomNav from './BottomNav'
+import type { TabId } from '../types'
 
 /* ─── types ─── */
 interface Mission {
@@ -116,18 +114,11 @@ function SubjectCard({ s }: { s: Subject }) {
   )
 }
 
-/* ─── nav items ─── */
-const NAV = [
-  { id: 'inicio',     label: 'Início',     Icon: Home },
-  { id: 'mapa',       label: 'Mapa',       Icon: Map },
-  { id: 'missoes',    label: 'Missões',    Icon: ClipboardList },
-  { id: 'interclasse',label: 'Interclasse',Icon: Trophy },
-]
+interface HomeScreenProps {
+  onTabChange?: (tab: TabId) => void
+}
 
-/* ─── main ─── */
-export default function HomeScreen() {
-  const [activeNav, setActiveNav] = useState('inicio')
-
+export default function HomeScreen({ onTabChange = () => {} }: HomeScreenProps) {
   return (
     <div className="flex min-h-screen w-full items-start justify-center" style={{ background: '#EDEFED' }}>
       {/* phone shell — max-w-sm keeps it phone-sized on desktop */}
@@ -181,7 +172,10 @@ export default function HomeScreen() {
                 <CheckSquare size={18} strokeWidth={2} style={{ color: DARK_GREEN }} />
                 <h2 className="text-base font-bold text-gray-800">Missões de hoje</h2>
               </div>
-              <button className="flex items-center gap-0.5 text-xs font-medium text-gray-400 hover:text-gray-600 transition-colors">
+              <button
+                onClick={() => onTabChange('missoes')}
+                className="flex items-center gap-0.5 text-xs font-medium text-gray-400 hover:text-gray-600 transition-colors cursor-pointer"
+              >
                 Ver todas <ChevronRight size={14} strokeWidth={2} />
               </button>
             </div>
@@ -198,7 +192,10 @@ export default function HomeScreen() {
                 <BarChart3 size={18} strokeWidth={2} style={{ color: DARK_GREEN }} />
                 <h2 className="text-base font-bold text-gray-800">Domínio da sua turma</h2>
               </div>
-              <button className="flex h-7 w-7 items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors">
+              <button
+                onClick={() => onTabChange('mapa')}
+                className="flex h-7 w-7 items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 transition-colors cursor-pointer"
+              >
                 <ChevronRight size={15} strokeWidth={2} className="text-gray-500" />
               </button>
             </div>
@@ -210,7 +207,8 @@ export default function HomeScreen() {
 
             {/* overall row */}
             <div
-              className="mt-3 flex flex-col gap-2 rounded-2xl p-3.5"
+              onClick={() => onTabChange('mapa')}
+              className="mt-3 flex flex-col gap-2 rounded-2xl p-3.5 cursor-pointer hover:brightness-95 transition-all"
               style={{ background: '#EDFFF4' }}
             >
               <div className="flex items-center gap-3">
@@ -231,25 +229,8 @@ export default function HomeScreen() {
 
         </div>
 
-        {/* ── BOTTOM NAV ── */}
-        <nav className="fixed bottom-0 left-1/2 w-full max-w-sm -translate-x-1/2 border-t border-gray-200 bg-white px-2 py-2 z-20">
-          <div className="flex justify-around">
-            {NAV.map(({ id, label, Icon }) => {
-              const active = activeNav === id
-              return (
-                <button
-                  key={id}
-                  onClick={() => setActiveNav(id)}
-                  className="flex flex-col items-center gap-1 px-3 py-1.5 rounded-xl transition-colors"
-                  style={{ color: active ? DARK_GREEN : '#9CA3AF' }}
-                >
-                  <Icon size={22} strokeWidth={active ? 2.2 : 1.8} />
-                  <span className="text-[11px] font-semibold">{label}</span>
-                </button>
-              )
-            })}
-          </div>
-        </nav>
+        {/* ── UNIFIED BOTTOM NAV ── */}
+        <BottomNav activeTab="inicio" onTabChange={onTabChange} />
 
       </div>
     </div>

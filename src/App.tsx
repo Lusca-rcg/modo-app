@@ -1,13 +1,31 @@
 import { useState } from 'react'
 import LoginScreen from './components/LoginScreen'
 import HomeScreen from './components/HomeScreen'
+import MapScreen from './components/MapScreen'
+import MissionsScreen from './components/MissionsScreen'
+import type { TabId } from './types'
 
-type Page = 'login' | 'home'
+type AppState = 'login' | TabId
 
 export default function App() {
-  const [page, setPage] = useState<Page>('login')
+  const [currentTab, setCurrentTab] = useState<AppState>('login')
 
-  return page === 'login'
-    ? <LoginScreen onLoginSuccess={() => setPage('home')} />
-    : <HomeScreen />
+  if (currentTab === 'login') {
+    return <LoginScreen onLoginSuccess={() => setCurrentTab('inicio')} />
+  }
+
+  const handleTabChange = (tab: TabId) => {
+    setCurrentTab(tab)
+  }
+
+  if (currentTab === 'mapa') {
+    return <MapScreen onTabChange={handleTabChange} />
+  }
+
+  if (currentTab === 'missoes') {
+    return <MissionsScreen onTabChange={handleTabChange} />
+  }
+
+  // 'inicio', 'interclasse', 'bem-estar' fallback to HomeScreen with active tab indicator
+  return <HomeScreen onTabChange={handleTabChange} />
 }
