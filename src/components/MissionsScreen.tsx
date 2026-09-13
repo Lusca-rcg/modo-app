@@ -90,11 +90,15 @@ const SUBJECT_STATS: SubjectStat[] = [
   { id: 'bio', name: 'Biologia',   percentage: 49, dotColor: '#0D9488', barColor: '#0D9488' },
 ]
 
+// Missions that have a game associated
+const GAME_MISSIONS = new Set(['matematica', 'historia'])
+
 interface MissionsScreenProps {
   onTabChange: (tab: TabId) => void
+  onMissionSelect?: (missionId: string) => void
 }
 
-export default function MissionsScreen({ onTabChange }: MissionsScreenProps) {
+export default function MissionsScreen({ onTabChange, onMissionSelect }: MissionsScreenProps) {
   const [missionList, setMissionList] = useState(MISSIONS)
 
   const handleToggleMission = (id: string) => {
@@ -157,7 +161,13 @@ export default function MissionsScreen({ onTabChange }: MissionsScreenProps) {
               return (
                 <div
                   key={m.id}
-                  onClick={() => handleToggleMission(m.id)}
+                  onClick={() => {
+                    if (GAME_MISSIONS.has(m.id) && onMissionSelect) {
+                      onMissionSelect(m.id)
+                    } else {
+                      handleToggleMission(m.id)
+                    }
+                  }}
                   className="flex items-center gap-3 rounded-2xl bg-white p-3.5 shadow-xs border border-gray-100/80 cursor-pointer hover:border-gray-200 transition-all active:scale-[0.99]"
                 >
                   {/* Subject Icon Box */}

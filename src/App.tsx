@@ -3,29 +3,59 @@ import LoginScreen from './components/LoginScreen'
 import HomeScreen from './components/HomeScreen'
 import MapScreen from './components/MapScreen'
 import MissionsScreen from './components/MissionsScreen'
+import CronixGame from './components/CronixGame'
+import MatSpeedGame from './components/MatSpeedGame'
 import type { TabId } from './types'
 
-type AppState = 'login' | TabId
+type AppScreen = 'login' | TabId | 'cronix' | 'mat-speed'
 
 export default function App() {
-  const [currentTab, setCurrentTab] = useState<AppState>('login')
+  const [screen, setScreen] = useState<AppScreen>('login')
+  // Remember which tab was active before entering a game
+  const [prevTab, setPrevTab] = useState<TabId>('missoes')
 
-  if (currentTab === 'login') {
-    return <LoginScreen onLoginSuccess={() => setCurrentTab('inicio')} />
+  function handleTabChange(tab: TabId) {
+    setScreen(tab)
   }
 
-  const handleTabChange = (tab: TabId) => {
-    setCurrentTab(tab)
+  function handleMissionSelect(missionId: string) {
+    setPrevTab('missoes')
+    if (missionId === 'historia') {
+      setScreen('cronix')
+    } else if (missionId === 'matematica') {
+      setScreen('mat-speed')
+    }
   }
 
-  if (currentTab === 'mapa') {
+  function handleGameBack() {
+    setScreen(prevTab)
+  }
+
+  if (screen === 'login') {
+    return <LoginScreen onLoginSuccess={() => setScreen('inicio')} />
+  }
+
+  if (screen === 'cronix') {
+    return <CronixGame onBack={handleGameBack} />
+  }
+
+  if (screen === 'mat-speed') {
+    return <MatSpeedGame onBack={handleGameBack} />
+  }
+
+  if (screen === 'mapa') {
     return <MapScreen onTabChange={handleTabChange} />
   }
 
-  if (currentTab === 'missoes') {
-    return <MissionsScreen onTabChange={handleTabChange} />
+  if (screen === 'missoes') {
+    return (
+      <MissionsScreen
+        onTabChange={handleTabChange}
+        onMissionSelect={handleMissionSelect}
+      />
+    )
   }
 
-  // 'inicio', 'interclasse', 'bem-estar' fallback to HomeScreen with active tab indicator
+  // 'inicio', 'interclasse', 'bem-estar'
   return <HomeScreen onTabChange={handleTabChange} />
 }
