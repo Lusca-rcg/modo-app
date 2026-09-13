@@ -128,7 +128,7 @@ export default function LoginScreen({ onLoginSuccess }: { onLoginSuccess?: () =>
                   type="text"
                   value={matricula}
                   onChange={(e) => { setMatricula(e.target.value); setErrorMessage('') }}
-                  placeholder="Digite sua matrícula - Entre com 12345"
+                  placeholder="Entre com 12345"
                   autoComplete="username"
                   style={{
                     width: '100%', border: 'none', outline: 'none',
@@ -162,7 +162,7 @@ export default function LoginScreen({ onLoginSuccess }: { onLoginSuccess?: () =>
                   type={showPassword ? 'text' : 'password'}
                   value={senha}
                   onChange={(e) => { setSenha(e.target.value); setErrorMessage('') }}
-                  placeholder="Digite sua senha - Entre com 6789"
+                  placeholder="Entre com 6789"
                   autoComplete="current-password"
                   style={{
                     width: '100%', border: 'none', outline: 'none',
