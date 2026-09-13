@@ -121,14 +121,14 @@ export default function LoginScreen({ onLoginSuccess }: { onLoginSuccess?: () =>
               <User size={22} strokeWidth={1.6} style={{ color: '#9CA3A0', flexShrink: 0 }} />
               <div style={{ flex: 1 }}>
                 <div style={{ fontSize: 11, fontWeight: 600, color: '#9CA3A0', marginBottom: 2, letterSpacing: '0.02em' }}>
-                  Matrícula
+                  Matrícula 
                 </div>
                 <input
                   id="matricula-input"
                   type="text"
                   value={matricula}
                   onChange={(e) => { setMatricula(e.target.value); setErrorMessage('') }}
-                  placeholder="Digite sua matrícula"
+                  placeholder="Digite sua matrícula - Entre com 12345"
                   autoComplete="username"
                   style={{
                     width: '100%', border: 'none', outline: 'none',
@@ -162,7 +162,7 @@ export default function LoginScreen({ onLoginSuccess }: { onLoginSuccess?: () =>
                   type={showPassword ? 'text' : 'password'}
                   value={senha}
                   onChange={(e) => { setSenha(e.target.value); setErrorMessage('') }}
-                  placeholder="Digite sua senha"
+                  placeholder="Digite sua senha - Entre com 6789"
                   autoComplete="current-password"
                   style={{
                     width: '100%', border: 'none', outline: 'none',
