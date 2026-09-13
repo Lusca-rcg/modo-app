@@ -132,7 +132,7 @@ function Toggle({ checked, onChange, id }: { checked: boolean; onChange: (v: boo
 /* ─────────────────────────────────────────────
    Main Component
 ───────────────────────────────────────────── */
-export default function LoginScreen() {
+export default function LoginScreen({ onLoginSuccess }: { onLoginSuccess?: () => void }) {
   const matriculaId = useId()
   const senhaId = useId()
   const toggleId = useId()
@@ -167,10 +167,12 @@ export default function LoginScreen() {
     // Simulated async login — replace with real API call
     await new Promise((r) => setTimeout(r, 1800))
 
-    // Demo: matricula=12345, senha=1234 → success
-    const isValid = form.matricula === '12345' && form.senha === '1234'
+    // Demo: matricula=12345, senha=6789 → success
+    const isValid = form.matricula === '12345' && form.senha === '6789'
     if (isValid) {
       setSuccess(true)
+      // Navigate to home after success animation
+      setTimeout(() => onLoginSuccess?.(), 1600)
     } else {
       setErrors({ form: 'Matrícula ou senha incorretos. Tente novamente.' })
     }
