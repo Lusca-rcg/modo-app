@@ -95,7 +95,6 @@ type Phase = 'hub' | 'question' | 'result'
 
 /* ── Component ── */
 export default function CronixGame({ onBack }: { onBack: () => void }) {
-  const [score, setScore] = useState(0)
   const [phase, setPhase] = useState<Phase>('hub')
   const [selected, setSelected] = useState<HistEvent | null>(null)
   const [answered, setAnswered] = useState<Record<string, boolean>>({})
@@ -115,9 +114,6 @@ export default function CronixGame({ onBack }: { onBack: () => void }) {
     const correct = selected!.options[idx].correct
     setSelectedOption(idx)
     setLastResult(correct)
-    if (correct && answered[selected!.id] === undefined) {
-      setScore(s => s + 100)
-    }
     setAnswered(prev => ({ ...prev, [selected!.id]: correct }))
     setPhase('result')
   }
@@ -172,16 +168,10 @@ export default function CronixGame({ onBack }: { onBack: () => void }) {
           }} />
         </div>
 
-        {/* Score + Menu */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <div style={{ textAlign: 'right' }}>
-            <div style={{ fontSize: 8, color: GOLD, opacity: 0.55, letterSpacing: '0.1em' }}>PONTOS</div>
-            <div style={{ fontSize: 18, fontWeight: 900, color: GOLD, lineHeight: 1 }}>{score}</div>
-          </div>
-          <button style={{ background: 'none', border: 'none', cursor: 'pointer', color: GOLD, opacity: 0.6 }}>
-            <Menu size={20} />
-          </button>
-        </div>
+        {/* Menu */}
+        <button style={{ background: 'none', border: 'none', cursor: 'pointer', color: GOLD, opacity: 0.6 }}>
+          <Menu size={20} />
+        </button>
       </div>
 
       {/* Subtitle */}
@@ -352,7 +342,7 @@ export default function CronixGame({ onBack }: { onBack: () => void }) {
                 <span style={{ fontSize: 18, flexShrink: 0 }}>{lastResult ? '✅' : '❌'}</span>
                 <div>
                   <div style={{ fontSize: 13, fontWeight: 700, color: lastResult ? '#15803D' : '#B91C1C' }}>
-                    {lastResult ? `+100 pontos! Excelente!` : 'Resposta incorreta.'}
+                    {lastResult ? 'Excelente! Resposta correta!' : 'Resposta incorreta.'}
                   </div>
                   {!lastResult && (
                     <div style={{ fontSize: 11, color: '#6B4226', marginTop: 3 }}>

@@ -88,11 +88,9 @@ export default function MatSpeedGame({ onBack }: { onBack: () => void }) {
   const [mode, setMode] = useState<GameMode>('velocidade')
   const [phase, setPhase] = useState<Phase>('hub')
   const [activeOp, setActiveOp] = useState<ActiveOp>('soma')
-  const [xp, setXp] = useState(1240)
 
   // Playing state
   const [question, setQuestion] = useState<Question | null>(null)
-  const [score, setScore] = useState(0)
   const [streak, setStreak] = useState(0)
   const [lives, setLives] = useState(3)
   const [answered, setAnswered] = useState<number | null>(null)  // selected option
@@ -113,7 +111,6 @@ export default function MatSpeedGame({ onBack }: { onBack: () => void }) {
   function startGame(op: ActiveOp) {
     const maxLives = op === 'sobrevivencia' ? 3 : 99
     setActiveOp(op)
-    setScore(0)
     setStreak(0)
     setLives(maxLives)
     livesRef.current = maxLives
@@ -169,10 +166,7 @@ export default function MatSpeedGame({ onBack }: { onBack: () => void }) {
     const correct = opt === question!.answer
 
     if (correct) {
-      const pts = 10 * (streak + 1)
-      setScore(s => s + pts)
       setStreak(s => s + 1)
-      setXp(x => x + pts)
     } else {
       handleWrong()
       return
@@ -226,10 +220,7 @@ export default function MatSpeedGame({ onBack }: { onBack: () => void }) {
             ASSAAD GAMES
           </div>
 
-          <div style={{ textAlign: 'right' }}>
-            <div style={{ fontSize: 8, color: GOLD_DIM, letterSpacing: '0.1em' }}>XP TOTAL</div>
-            <div style={{ fontSize: 16, fontWeight: 900, color: GOLD, lineHeight: 1 }}>{xp}</div>
-          </div>
+          <div style={{ width: 60 }} />
         </div>
 
         {/* Title */}
@@ -371,12 +362,13 @@ export default function MatSpeedGame({ onBack }: { onBack: () => void }) {
       </p>
 
       <div style={{
-        background: CARD_BG, borderRadius: 20, padding: '24px 40px',
+        background: CARD_BG, borderRadius: 20, padding: '20px 32px',
         border: `1.5px solid ${GOLD}35`, marginBottom: 28,
         boxShadow: `0 8px 32px rgba(0,0,0,0.4)`, position: 'relative',
       }}>
-        <div style={{ fontSize: 11, color: GOLD_DIM, letterSpacing: '0.15em', marginBottom: 6 }}>PONTUAÇÃO FINAL</div>
-        <div style={{ fontSize: 52, fontWeight: 900, color: GOLD, textShadow: `0 0 20px ${GOLD}50` }}>{score}</div>
+        <div style={{ fontSize: 13, fontWeight: 700, color: GOLD, letterSpacing: '0.05em' }}>
+          Bom trabalho! Continue praticando!
+        </div>
       </div>
 
       <div style={{ display: 'flex', gap: 10, width: '100%', position: 'relative' }}>
@@ -433,10 +425,7 @@ export default function MatSpeedGame({ onBack }: { onBack: () => void }) {
             </div>
           </div>
 
-          <div style={{ textAlign: 'right' }}>
-            <div style={{ fontSize: 8, color: TEXT_DIM, letterSpacing: '0.1em' }}>PONTOS</div>
-            <div style={{ fontSize: 16, fontWeight: 900, color: GOLD }}>{score}</div>
-          </div>
+          <div style={{ width: 24 }} />
         </div>
 
         {/* Combo + lives */}

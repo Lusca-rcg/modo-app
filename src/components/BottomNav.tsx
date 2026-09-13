@@ -1,4 +1,4 @@
-import { Home, Map, ClipboardList, Trophy, Brain } from 'lucide-react'
+import { Home, Map, ClipboardList, Trophy } from 'lucide-react'
 import type { TabId } from '../types'
 
 export type { TabId }
