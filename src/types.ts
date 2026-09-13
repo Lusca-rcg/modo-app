@@ -1,1 +1,1 @@
-export type TabId = 'inicio' | 'mapa' | 'missoes' | 'interclasse' | 'bem-estar'
+export type TabId = 'inicio' | 'mapa' | 'missoes' | 'liga-modo'

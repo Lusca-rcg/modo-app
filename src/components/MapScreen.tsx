@@ -35,7 +35,7 @@ interface MapScreenProps {
 }
 
 export default function MapScreen({ onTabChange }: MapScreenProps) {
-  const [activeFilter, setActiveFilter] = useState<'escola' | 'interclasse'>('escola')
+  const [activeFilter, setActiveFilter] = useState<'escola' | 'liga-modo'>('escola')
   const [selectedSubject] = useState('Matemática')
   const [selectedGrade] = useState('8º Ano')
   const [zoomLevel, setZoomLevel] = useState(1)
@@ -90,14 +90,14 @@ export default function MapScreen({ onTabChange }: MapScreenProps) {
                 Minha escola
               </button>
               <button
-                onClick={() => setActiveFilter('interclasse')}
+                onClick={() => setActiveFilter('liga-modo')}
                 className="rounded-xl px-3 py-1.5 text-xs font-semibold transition-all cursor-pointer"
                 style={{
-                  background: activeFilter === 'interclasse' ? DARK_GREEN : 'transparent',
-                  color: activeFilter === 'interclasse' ? '#fff' : '#64748B',
+                  background: activeFilter === 'liga-modo' ? DARK_GREEN : 'transparent',
+                  color: activeFilter === 'liga-modo' ? '#fff' : '#64748B',
                 }}
               >
-                Interclasse
+                Liga MODO
               </button>
             </div>
 

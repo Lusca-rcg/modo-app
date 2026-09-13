@@ -11,11 +11,10 @@ interface BottomNavProps {
 const DARK_GREEN = '#1B3B2B'
 
 const NAV_ITEMS: { id: TabId; label: string; Icon: React.ElementType }[] = [
-  { id: 'inicio',     label: 'Início',     Icon: Home },
-  { id: 'mapa',       label: 'Mapa',       Icon: Map },
-  { id: 'missoes',    label: 'Missões',    Icon: ClipboardList },
-  { id: 'interclasse',label: 'Interclasse',Icon: Trophy },
-  { id: 'bem-estar',  label: 'Bem-estar',  Icon: Brain },
+  { id: 'inicio', label: 'Início', Icon: Home },
+  { id: 'mapa', label: 'Mapa', Icon: Map },
+  { id: 'missoes', label: 'Missões', Icon: ClipboardList },
+  { id: 'liga-modo', label: 'Liga MODO', Icon: Trophy },
 ]
 
 export default function BottomNav({ activeTab, onTabChange }: BottomNavProps) {
