@@ -77,32 +77,32 @@ const MODE_SECONDS: Record<GameMode, number> = {
 }
 
 const OPS = [
-  { id: 'soma' as OperationId,           symbol: '+', label: 'Soma',           color: '#22D3EE', desc: 'Iniciante • 100 níveis',     bg: 'rgba(34,211,238,0.07)' },
-  { id: 'subtracao' as OperationId,      symbol: '−', label: 'Subtração',      color: '#4ADE80', desc: 'Intermediário • 100 níveis', bg: 'rgba(74,222,128,0.07)' },
-  { id: 'multiplicacao' as OperationId,  symbol: '×', label: 'Multiplicação',  color: '#F97316', desc: 'Avançado • 100 níveis',      bg: 'rgba(249,115,22,0.07)' },
-  { id: 'divisao' as OperationId,        symbol: '÷', label: 'Divisão',        color: '#A78BFA', desc: 'Especialista • 100 níveis',  bg: 'rgba(167,139,250,0.07)' },
+  { id: 'soma' as OperationId, symbol: '+', label: 'Soma', color: '#22D3EE', desc: 'Iniciante • 100 níveis', bg: 'rgba(34,211,238,0.07)' },
+  { id: 'subtracao' as OperationId, symbol: '−', label: 'Subtração', color: '#4ADE80', desc: 'Intermediário • 100 níveis', bg: 'rgba(74,222,128,0.07)' },
+  { id: 'multiplicacao' as OperationId, symbol: '×', label: 'Multiplicação', color: '#F97316', desc: 'Avançado • 100 níveis', bg: 'rgba(249,115,22,0.07)' },
+  { id: 'divisao' as OperationId, symbol: '÷', label: 'Divisão', color: '#A78BFA', desc: 'Especialista • 100 níveis', bg: 'rgba(167,139,250,0.07)' },
 ]
 
 /* ── Component ── */
 export default function MatSpeedGame({ onBack }: { onBack: () => void }) {
-  const [mode, setMode]       = useState<GameMode>('velocidade')
-  const [phase, setPhase]     = useState<Phase>('hub')
+  const [mode, setMode] = useState<GameMode>('velocidade')
+  const [phase, setPhase] = useState<Phase>('hub')
   const [activeOp, setActiveOp] = useState<ActiveOp>('soma')
-  const [xp, setXp]           = useState(1240)
+  const [xp, setXp] = useState(1240)
 
   // Playing state
-  const [question, setQuestion]   = useState<Question | null>(null)
-  const [score, setScore]         = useState(0)
-  const [streak, setStreak]       = useState(0)
-  const [lives, setLives]         = useState(3)
-  const [answered, setAnswered]   = useState<number | null>(null)  // selected option
-  const [timeLeft, setTimeLeft]   = useState(100)
+  const [question, setQuestion] = useState<Question | null>(null)
+  const [score, setScore] = useState(0)
+  const [streak, setStreak] = useState(0)
+  const [lives, setLives] = useState(3)
+  const [answered, setAnswered] = useState<number | null>(null)  // selected option
+  const [timeLeft, setTimeLeft] = useState(100)
   const [questionCount, setQuestionCount] = useState(0)
 
   // Refs to avoid stale closures in timer
-  const livesRef     = useRef(lives)
-  const answeredRef  = useRef(answered)
-  const activeOpRef  = useRef(activeOp)
+  const livesRef = useRef(lives)
+  const answeredRef = useRef(answered)
+  const activeOpRef = useRef(activeOp)
 
   useEffect(() => { livesRef.current = lives }, [lives])
   useEffect(() => { answeredRef.current = answered }, [answered])
@@ -141,7 +141,7 @@ export default function MatSpeedGame({ onBack }: { onBack: () => void }) {
       })
     }, 100)
     return () => clearInterval(id)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [phase, question, timerSeconds])
 
   function handleWrong(isTimeout = false) {
@@ -241,7 +241,7 @@ export default function MatSpeedGame({ onBack }: { onBack: () => void }) {
               letterSpacing: '-0.02em',
               textShadow: `0 0 24px ${GOLD}60`,
             }}>
-              4MAT SPEED
+              MATEMÁTICA
             </h1>
             <Zap size={26} fill={GOLD} style={{ color: GOLD, filter: `drop-shadow(0 0 8px ${GOLD}80)` }} />
           </div>

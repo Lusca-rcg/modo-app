@@ -164,7 +164,7 @@ export default function CronixGame({ onBack }: { onBack: () => void }) {
             Assaad Games
           </div>
           <div style={{ fontSize: 26, fontWeight: 900, color: GOLD, letterSpacing: '0.12em', lineHeight: 1 }}>
-            CRONIX
+            HISTÓRIA
           </div>
           <div style={{
             width: 32, height: 2, background: GOLD, margin: '3px auto 0',
